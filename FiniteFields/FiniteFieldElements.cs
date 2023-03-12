@@ -170,18 +170,4 @@ public class FiniteFieldElements
         }
         return firstElements * ~secondElements;
     }
-    
-    // public byte[] GetToBinary()
-    // { 
-    //     var degree = 0;
-    //     var element = 0;
-    //     for (var i = Coefficients.Length - 1; i >= 0; i--)
-    //     {
-    //         element += Coefficients[i] * (int)Math.Pow(Field.P, degree++);
-    //         //degree++;
-    //     }
-    //     if (Field.P != 2) 
-    //         throw new Exception("The field characteristic must be equal to 2");
-    //     return BitConverter.GetBytes(element);
-    // }
 }

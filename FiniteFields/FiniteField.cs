@@ -33,6 +33,7 @@ public class FiniteField
         var thirdStep = Convert.ToInt32(secondStep);
         return thirdStep;
     }
+    
     public FiniteFieldElements GetBinaryRepresent(int m)
     {
         if (P != 2) 
@@ -46,6 +47,7 @@ public class FiniteField
         result.Reverse();
         return new FiniteFieldElements(result.ToArray(), this);
     }
+    
     public FiniteFieldElements GetFromBinaryRepresent(byte[] bytes)
     {
         if (P != 2) 
@@ -53,6 +55,7 @@ public class FiniteField
         var m = BitConverter.ToInt32(bytes, 0);
         return GetBinaryRepresent(m);
     }
+    
     public byte[] GetToBinary(FiniteFieldElements element)
     { 
         if (element.Field.P != 2) 
