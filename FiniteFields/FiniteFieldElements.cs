@@ -3,7 +3,7 @@ namespace FiniteFields;
 public class FiniteFieldElements
 {
     public int[] Coefficients { get; }
-    private FiniteField Field { get; }
+    public FiniteField Field { get; }
 
     public FiniteFieldElements(int[] coefficients, FiniteField field)
     {
@@ -22,8 +22,8 @@ public class FiniteFieldElements
         return new FiniteFieldElements(result, elements.Field);
     }
 
-    public static FiniteFieldElements operator ~(FiniteFieldElements elements)
-        => elements ^ ((int)Math.Pow(elements.Field.P, elements.Field.N) - 2);
+    public static FiniteFieldElements operator ~(FiniteFieldElements element)
+        => element ^ ((int)Math.Pow(element.Field.P, element.Field.N) - 2);
 
     public static FiniteFieldElements operator ^(FiniteFieldElements elements, int m)
     {
@@ -170,4 +170,18 @@ public class FiniteFieldElements
         }
         return firstElements * ~secondElements;
     }
+    
+    // public byte[] GetToBinary()
+    // { 
+    //     var degree = 0;
+    //     var element = 0;
+    //     for (var i = Coefficients.Length - 1; i >= 0; i--)
+    //     {
+    //         element += Coefficients[i] * (int)Math.Pow(Field.P, degree++);
+    //         //degree++;
+    //     }
+    //     if (Field.P != 2) 
+    //         throw new Exception("The field characteristic must be equal to 2");
+    //     return BitConverter.GetBytes(element);
+    // }
 }

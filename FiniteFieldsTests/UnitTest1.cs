@@ -64,4 +64,11 @@ public class Tests
         var divide = element1 / element2;
         Assert.That(divide.Coefficients, Is.EqualTo(new int[] {0}));
     }
+    [Test]
+    public void ToBinary1()
+    {
+        var GF4 = new FiniteField(2, 3, new int[] {1, 1});
+        var element = GF4.GetBinaryRepresent(4);
+        Assert.That(element.Coefficients, Is.EqualTo(new int[] {0, 0, 1}));
+    }
 }
