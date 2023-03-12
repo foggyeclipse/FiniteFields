@@ -10,8 +10,8 @@ public class Tests
     {
         var GF4 = new FiniteField(2, 2, new int[] {1, 1});
         var element1 = new FiniteFieldElements(new int[] {1, 1}, GF4);
-        var reverse = ~ element1;
-        Assert.That(reverse.Coefficients, Is.EqualTo(new int[] {0}));
+        var reverse = ~element1;
+        Assert.That(reverse.Coefficients, Is.EqualTo(new int[1] {0}));
     }
 
     [Test]
@@ -21,7 +21,7 @@ public class Tests
         var element1 = new FiniteFieldElements(new int[] {1, 1}, GF4);
         var element2 = new FiniteFieldElements(new int[] {0, 1}, GF4);
         var sum = element1 + element2;
-        Assert.That(sum.Coefficients, Is.EqualTo(new int[] {1, 0}));
+        Assert.That(sum.Coefficients, Is.EqualTo(new int[] {1 }));
     }
 
     [Test]
