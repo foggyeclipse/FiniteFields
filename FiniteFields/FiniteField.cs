@@ -33,6 +33,9 @@ public class FiniteField
             result.Add(bytesInt % 2);
             bytesInt /= 2;
         }
+
+        if (result.Count == 0) 
+            return new FiniteFieldElement(result.ToArray(), this);
         while (result[result.Count - 1] == 0)
         {
             if (result.Count - 1 == 0)
