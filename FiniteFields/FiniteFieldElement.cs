@@ -2,8 +2,8 @@ namespace FiniteFields;
 
 public class FiniteFieldElement
 {
-    public int[] Coefficients { get; private set; }
-    public FiniteField Field { get; }
+    public int[] Coefficients { get; set; }
+    public FiniteField Field { get; set; }
 
     public FiniteFieldElement(int[] coefficients, FiniteField field) 
     {   

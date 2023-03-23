@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace FiniteFields;
+﻿namespace FiniteFields;
 
 public class FiniteField
 {
