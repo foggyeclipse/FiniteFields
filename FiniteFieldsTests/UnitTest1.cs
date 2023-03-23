@@ -133,7 +133,7 @@ public class Tests
     public void ToBinary1()
     {
         var GF4 = new FiniteField(2, 2, new int[] { 1, 1, 1 });
-        var element = FiniteField.GetBinaryRepresent(new FiniteFieldElement(new int[] { 0, 0, 1 }, GF4));
+        var element = GF4.GetBinaryRepresent(new FiniteFieldElement(new int[] { 0, 0, 1 }, GF4));
         Assert.That(element, Is.EqualTo(new byte[] { 4, 0, 0, 0 }));
     }
 }

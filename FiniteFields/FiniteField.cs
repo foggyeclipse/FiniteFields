@@ -42,7 +42,7 @@ public class FiniteField
         return new FiniteFieldElement(result.ToArray(), this);
     }
 
-    public static byte[] GetBinaryRepresent(FiniteFieldElement element)
+    public byte[] GetBinaryRepresent(FiniteFieldElement element)
     {
         if (element.Field.P != 2) 
             throw new Exception("The field characteristic must be equal to 2");
