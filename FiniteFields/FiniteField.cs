@@ -42,7 +42,6 @@ public class FiniteField
                 break;
             result = result.SkipLast(1).ToList();
         }
-        
         return new FiniteFieldElement(result.ToArray(), this);
     }
 
