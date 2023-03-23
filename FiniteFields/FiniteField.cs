@@ -15,11 +15,11 @@ public class FiniteField
 
     public FiniteFieldElement GetZero()
     {
-        return new FiniteFieldElement(new[] {0}, this);
+        return new FiniteFieldElement(new[] { 0 }, this);
     }
     public FiniteFieldElement GetOne()
     {
-        return new FiniteFieldElement(new[] {1}, this);
+        return new FiniteFieldElement(new[] { 1 }, this);
     }
 
     public FiniteFieldElement GetFiniteFieldRepresent(byte[] bytes)
@@ -42,6 +42,7 @@ public class FiniteField
                 break;
             result = result.SkipLast(1).ToList();
         }
+        
         return new FiniteFieldElement(result.ToArray(), this);
     }
 
