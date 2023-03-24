@@ -22,7 +22,7 @@ public class FiniteField
         return new FiniteFieldElement(new[] { 1 }, this);
     }
 
-    public FiniteFieldElement GetFiniteFieldRepresent(byte[] bytes)
+    public FiniteFieldElement GetFiniteFieldRepresent(byte[]? bytes)
     {
         if (P != 2) 
             throw new Exception("The field characteristic must be equal to 2");
@@ -52,7 +52,7 @@ public class FiniteField
         var result = BitConverter.GetBytes(SchemeHorner(2, element.Coefficients));
         return result;
     }
-    public static int SchemeHorner(int x, int[] coefficients)
+    private static int SchemeHorner(int x, int[] coefficients)
     {
         var result = coefficients[coefficients.Length-1];
         for (var i = coefficients.Length - 2; i >= 0; i--)

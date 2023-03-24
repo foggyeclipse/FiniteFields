@@ -126,7 +126,7 @@ public class Tests
     {
         var GF4 = new FiniteField(2, 3, new[] { 1, 1 });
         var element = GF4.GetFiniteFieldRepresent(new byte[] { 4, 0, 0, 0 });
-        Assert.That(element.Coefficients, Is.EqualTo(new[] { 0, 0, 1, 0 }));
+        Assert.That(element.Coefficients, Is.EqualTo(new[] { 0, 0, 1}));
     }
 
     [Test]
