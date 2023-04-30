@@ -8,6 +8,8 @@ public class FiniteField
 
     public FiniteField(int p, int n, int[] q)
     {
+        if (n + 1 - q.Length < 0)
+            throw new Exception("The degree of the irreducible polynomial does not match the given field");
         P = p;
         N = n;
         Q = q;
@@ -28,7 +30,7 @@ public class FiniteField
             throw new Exception("The field characteristic must be equal to 2");
         var bytesInt = (int)bytes;
         var result = new List<int>();
-        for (var i = bytesInt; i > 0; i--)
+        for (var i = 8; i > 0; i--)
         {
             result.Add(bytesInt % 2);
             bytesInt /= 2;

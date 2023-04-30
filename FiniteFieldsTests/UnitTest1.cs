@@ -9,10 +9,10 @@ public class Tests
     public void Addition1()
     {
         var GF9 = new FiniteField(3, 2, new[] { 1, 1, 2 });
-        var element1 = new FiniteFieldElement(new[] { 0, 2, 2 }, GF9);
+        var element1 = new FiniteFieldElement(new[] { 0, 2 }, GF9);
         var element2 = new FiniteFieldElement(new[] { 1, 1 }, GF9);
         var addition = element1 + element2;
-        Assert.That(addition.Coefficients, Is.EqualTo(new[] { 1, 0, 2 }));
+        Assert.That(addition.Coefficients, Is.EqualTo(new[] { 1  }));
     }
 
     [Test]
@@ -29,20 +29,20 @@ public class Tests
     public void Subtract1()
     {
         var GF9 = new FiniteField(3, 2, new[] { 1, 1, 2 });
-        var element1 = new FiniteFieldElement(new[] { 2, 2, 1 }, GF9);
+        var element1 = new FiniteFieldElement(new[] { 2, 1 }, GF9);
         var element2 = new FiniteFieldElement(new[] { 1, 1 }, GF9);
         var subtract = element1 - element2;
-        Assert.That(subtract.Coefficients, Is.EqualTo(new[] { 1, 1, 1 }));
+        Assert.That(subtract.Coefficients, Is.EqualTo(new[] { 1 }));
     }
 
     [Test]
     public void Subtract2()
     {
         var GF4 = new FiniteField(2, 2, new[] { 1, 1, 1 });
-        var element1 = new FiniteFieldElement(new[] { 1, 1, 1 }, GF4);
+        var element1 = new FiniteFieldElement(new[] { 1, 1 }, GF4);
         var element2 = new FiniteFieldElement(new[] { 0, 1 }, GF4);
         var subtract = element1 - element2;
-        Assert.That(subtract.Coefficients, Is.EqualTo(new[] { 1, 0, 1 }));
+        Assert.That(subtract.Coefficients, Is.EqualTo(new[] { 1 }));
     }
 
     [Test]
@@ -105,10 +105,10 @@ public class Tests
     public void Divide1()
     {
         var GF8 = new FiniteField(2, 3, new[] { 1, 1, 0, 1 });
-        var element1 = new FiniteFieldElement(new[] { 1, 0, 0, 1 }, GF8);
+        var element1 = new FiniteFieldElement(new[] { 0, 0, 1 }, GF8);
         var element2 = new FiniteFieldElement(new[] { 1, 1 }, GF8);
         var divide = element1 / element2;
-        Assert.That(divide.Coefficients, Is.EqualTo(new[] { 1, 1, 1 }));
+        Assert.That(divide.Coefficients, Is.EqualTo(new[] { 1, 0, 1 }));
     }
 
     [Test]
@@ -133,7 +133,7 @@ public class Tests
     public void ToBinary1()
     {
         var GF4 = new FiniteField(2, 2, new int[] { 1, 1, 1 });
-        var element = GF4.GetBinaryRepresent(new FiniteFieldElement(new int[] { 0, 0, 1 }, GF4));
-        Assert.That(element, Is.EqualTo( 4 ));
+        var element = GF4.GetBinaryRepresent(new FiniteFieldElement(new int[] { 0, 1 }, GF4));
+        Assert.That(element, Is.EqualTo( 2 ));
     }
 }

@@ -7,7 +7,7 @@ public class FiniteFieldElement
 
     public FiniteFieldElement(int[] coefficients, FiniteField field) 
     {   
-        if (field.N + 1 - coefficients.Length < 0)
+        if (field.N - coefficients.Length < 0)
             throw new Exception("The degree of the polynomial does not match the given field");
         Coefficients = coefficients;
         Field = field;
@@ -16,10 +16,17 @@ public class FiniteFieldElement
     public static FiniteFieldElement operator -(FiniteFieldElement element)
     {
         var degree = element.Coefficients.Length;
-        var result = new int[degree + 1];
+        var result = new int[degree];
         for (var i = 0; i < degree; i++)
         {
-            result[i] = -element.Coefficients[i];
+            if ((-element.Coefficients[i]) % element.Field.P < 0)
+                result[i] =
+                    (-element.Coefficients[i])  %
+                    element.Field.P + element.Field.P;
+            else
+                result[i] =
+                    (-element.Coefficients[i])  %
+                    element.Field.P;
         }
         return new FiniteFieldElement(result, element.Field);
     }
