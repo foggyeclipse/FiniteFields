@@ -58,15 +58,16 @@ public class FiniteFieldElement
         var maxDegree = firstLength > secondLength ? firstLength : secondLength;
         var minDegree = firstLength < secondLength ? firstLength : secondLength;
         
-        int[] result;
-        _ = firstElement.Coefficients.Length == maxDegree
-            ? result = firstElement.Coefficients
-            : result = secondElement.Coefficients;
+        var result = new int[maxDegree];
+        if (firstElement.Coefficients.Length == maxDegree)
+            Array.Copy(firstElement.Coefficients, result, maxDegree);
+        else 
+            Array.Copy(secondElement.Coefficients, result, maxDegree);
         for (var i = 0; i < minDegree; i++)
         {
             result[i] = (firstElement.Coefficients[i] + secondElement.Coefficients[i]) % firstElement.Field.P;
         }
-        while (result[result.Length - 1] == 0)
+        while (result[^1] == 0)
         {
             if (result.Length - 1 == 0)
                 break;
@@ -84,10 +85,11 @@ public class FiniteFieldElement
         var maxDegree = firstLength > secondLength ? firstLength : secondLength;
         var minDegree = firstLength < secondLength ? firstLength : secondLength;
 
-        int[] result;
-        _ = firstElement.Coefficients.Length == maxDegree
-            ? result = firstElement.Coefficients
-            : result = secondElement.Coefficients;
+        var result = new int[maxDegree];
+        if (firstElement.Coefficients.Length == maxDegree)
+            Array.Copy(firstElement.Coefficients, result, maxDegree);
+        else 
+            Array.Copy(secondElement.Coefficients, result, maxDegree);
         for (var i = 0; i < minDegree; i++)
         {
             if ((firstElement.Coefficients[i] - secondElement.Coefficients[i]) % firstElement.Field.P < 0)
@@ -99,7 +101,7 @@ public class FiniteFieldElement
                     (firstElement.Coefficients[i] - secondElement.Coefficients[i]) %
                     firstElement.Field.P;
         }
-        while (result[result.Length - 1] == 0)
+        while (result[^1] == 0)
         {
             if (result.Length - 1 == 0)
                 break;
@@ -144,48 +146,49 @@ public class FiniteFieldElement
                                     % maxElement.Field.P;
             }
         }
-        return result % new FiniteFieldElement(firstElement.Field.Q, firstElement.Field);
+        return new FiniteFieldElement(DivisionRemainder
+            (result, firstElement.Field.Q, firstElement.Field), firstElement.Field);
     }
-    public static FiniteFieldElement operator %(int[] firstElement,
-        FiniteFieldElement secondElement)
+    private static int[] DivisionRemainder(int[] firstElement,
+        int[] secondElement, FiniteField field)
     {
-        if (secondElement.Coefficients.Length > firstElement.Length)
-            return new FiniteFieldElement(firstElement, secondElement.Field);
+        if (secondElement.Length > firstElement.Length)
+            return firstElement;
         var firstDegree = firstElement.Length - 1;
-        var secondDegree = secondElement.Coefficients.Length - 1;
+        var secondDegree = secondElement.Length - 1;
 
         var quotient = new int[firstDegree - secondDegree + 1];
         var remainder = firstElement;
         for (var i = firstDegree; i >= secondDegree; i--)
         {
-            if (firstElement[i] * (int) Math.Pow(secondElement.Coefficients[secondDegree], secondElement.Field.P - 2)
-                 % secondElement.Field.P < 0)
+            if (firstElement[i] * (int) Math.Pow(secondElement[secondDegree], field.P - 2)
+                 % field.P < 0)
                 quotient[i - secondDegree] = firstElement[i] 
-                                             * (int) Math.Pow(secondElement.Coefficients[secondDegree], secondElement.Field.P - 2)
-                                             % secondElement.Field.P + secondElement.Field.P;
+                                             * (int) Math.Pow(secondElement[secondDegree], field.P - 2)
+                                             % field.P + field.P;
             else
                 quotient[i - secondDegree] = firstElement[i] 
-                                             * (int) Math.Pow(secondElement.Coefficients[secondDegree], secondElement.Field.P - 2)
-                                             % secondElement.Field.P;
+                                             * (int) Math.Pow(secondElement[secondDegree], field.P - 2)
+                                             % field.P;
             for (var j = secondDegree; j >= 0; j--)
             {
-                if ((remainder[i - secondDegree + j] - secondElement.Coefficients[j] * quotient[i - secondDegree]) 
-                    % secondElement.Field.P < 0)
-                    remainder[i - secondDegree + j] = (remainder[i - secondDegree + j] - secondElement.Coefficients[j] * quotient[i - secondDegree])
-                        % secondElement.Field.P + secondElement.Field.P;
+                if ((remainder[i - secondDegree + j] - secondElement[j] * quotient[i - secondDegree]) 
+                    % field.P < 0)
+                    remainder[i - secondDegree + j] = (remainder[i - secondDegree + j] - secondElement[j] * quotient[i - secondDegree])
+                        % field.P + field.P;
                 else 
-                    remainder[i - secondDegree + j] = (remainder[i - secondDegree + j] - secondElement.Coefficients[j] * quotient[i - secondDegree])
-                                                      % secondElement.Field.P;
+                    remainder[i - secondDegree + j] = (remainder[i - secondDegree + j] - secondElement[j] * quotient[i - secondDegree])
+                                                      % field.P;
             }
         }
         Array.Resize(ref remainder, secondDegree);
-        while (remainder[remainder.Length - 1] == 0)
+        while (remainder[^1] == 0)
         {
             if (remainder.Length - 1 == 0)
                 break;
             Array.Resize(ref remainder, remainder.Length - 1);
         }
-        return new FiniteFieldElement(remainder, secondElement.Field);
+        return remainder;
     }
     public static FiniteFieldElement operator /(FiniteFieldElement firstElement,
         FiniteFieldElement secondElement)

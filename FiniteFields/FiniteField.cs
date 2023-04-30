@@ -22,11 +22,11 @@ public class FiniteField
         return new FiniteFieldElement(new[] { 1 }, this);
     }
 
-    public FiniteFieldElement GetFiniteFieldRepresent(byte[]? bytes)
+    public FiniteFieldElement GetFiniteFieldRepresent(byte bytes)
     {
         if (P != 2) 
             throw new Exception("The field characteristic must be equal to 2");
-        var bytesInt = BitConverter.ToInt32(bytes);
+        var bytesInt = (int)bytes;
         var result = new List<int>();
         for (var i = bytesInt; i > 0; i--)
         {
@@ -36,7 +36,7 @@ public class FiniteField
 
         if (result.Count == 0) 
             return new FiniteFieldElement(result.ToArray(), this);
-        while (result[result.Count - 1] == 0)
+        while (result[^1] == 0)
         {
             if (result.Count - 1 == 0)
                 break;
@@ -45,16 +45,16 @@ public class FiniteField
         return new FiniteFieldElement(result.ToArray(), this);
     }
 
-    public byte[] GetBinaryRepresent(FiniteFieldElement element)
+    public byte GetBinaryRepresent(FiniteFieldElement element)
     {
         if (element.Field.P != 2) 
             throw new Exception("The field characteristic must be equal to 2");
-        var result = BitConverter.GetBytes(SchemeHorner(2, element.Coefficients));
+        var result = (byte)SchemeHorner(2, element.Coefficients);
         return result;
     }
     private static int SchemeHorner(int x, int[] coefficients)
     {
-        var result = coefficients[coefficients.Length-1];
+        var result = coefficients[^1];
         for (var i = coefficients.Length - 2; i >= 0; i--)
         {
             result = result * x + coefficients[i];

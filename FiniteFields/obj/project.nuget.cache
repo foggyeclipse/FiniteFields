@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Y9AC/rbToWUzk8gP0arT2NhKDdkQxaMeHUZPdg6u95L6zwOutVhib/gmNxp1lp2fW6dzpWXkH3C0qLhr7R5HTw==",
+  "dgSpecHash": "Kmc3vEBaZtx/MSUlRFqafyqX6JkC3mND+lCEKVC5hwOnPYyV/FziAOi8LnGNJ7aTx8/ZuEW7NOvabxQfotmaFQ==",
   "success": true,
   "projectFilePath": "/Users/macbook/RiderProjects/FiniteFields/FiniteFields/FiniteFields.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/macbook/.nuget/packages/microsoft.netcore.app.ref/6.0.16/microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
+    "/Users/macbook/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.16/microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
+  ],
   "logs": []
 }

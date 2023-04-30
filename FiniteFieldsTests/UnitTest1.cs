@@ -125,7 +125,7 @@ public class Tests
     public void ToFiniteField1()
     {
         var GF4 = new FiniteField(2, 3, new[] { 1, 1 });
-        var element = GF4.GetFiniteFieldRepresent(new byte[] { 4, 0, 0, 0 });
+        var element = GF4.GetFiniteFieldRepresent( 4 );
         Assert.That(element.Coefficients, Is.EqualTo(new[] { 0, 0, 1}));
     }
 
@@ -134,6 +134,6 @@ public class Tests
     {
         var GF4 = new FiniteField(2, 2, new int[] { 1, 1, 1 });
         var element = GF4.GetBinaryRepresent(new FiniteFieldElement(new int[] { 0, 0, 1 }, GF4));
-        Assert.That(element, Is.EqualTo(new byte[] { 4, 0, 0, 0 }));
+        Assert.That(element, Is.EqualTo( 4 ));
     }
 }
